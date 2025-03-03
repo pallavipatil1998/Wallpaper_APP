@@ -25,30 +25,64 @@ class _WallpaperHomeState extends State<WallpaperHome> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: Text("Wallpapers"),),
-      body: BlocBuilder<WallpaperBloc,WallpaperState>(builder: (ctx,state){
-        if(state is WallpaperLoadingState){
-          return Center(child: CircularProgressIndicator());
-        }else if(state is WallpaperErrorState){
-          return Center(child: Text("${state.errorMsg}"));
-        }else if(state is WallpaperLoadedState){
-          return ListView.builder(
-            itemCount: state.wallModel.photos!.length ,
-              itemBuilder: (ctx,index){
-                var eachWall=state.wallModel.photos![index].src!.portrait!;
-              return Container(
-                margin: EdgeInsets.all(20),
-                height: 200,width: 200,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(11),
-                  image: DecorationImage(image: NetworkImage(eachWall),fit: BoxFit.cover),
+      body: Padding(
+        padding: const EdgeInsets.only(left: 20),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            TextField(
+              decoration: InputDecoration(
+                hintText: 'Find Wallpaper..',
+                hintStyle: TextStyle(
+                  color: Color.fromARGB(255, 152, 152, 152),
+                  fontWeight: FontWeight.w800
                 ),
-              );
-              }
-              );
-        }
+                suffixIcon: Icon(Icons.image_search),
+                suffixIconColor: Color.fromARGB(255, 172, 172, 172),
+                enabledBorder: UnderlineInputBorder(
+                  borderSide: BorderSide(
+                    color: Color(0xffDBEBF1),
+                  ),
+                ),
+                focusedBorder: UnderlineInputBorder(
+                  borderSide: BorderSide(
+                    color: Color(0xffDBEBF1),
+                  ),
+                ),
+              ),
+            ),
+            Text("Tranding Wallpapers",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 20),),
+            Container(
+              height: 350,width: MediaQuery.of(context).size.width,
+              child: BlocBuilder<WallpaperBloc,WallpaperState>(builder: (ctx,state){
+                if(state is WallpaperLoadingState){
+                  return Center(child: CircularProgressIndicator());
+                }else if(state is WallpaperErrorState){
+                  return Center(child: Text("${state.errorMsg}"));
+                }else if(state is WallpaperLoadedState){
+                  return ListView.builder(
+                    scrollDirection: Axis.horizontal,
+                    itemCount: state.wallModel.photos!.length ,
+                      itemBuilder: (ctx,index){
+                        var eachWall=state.wallModel.photos![index].src!.portrait!;
+                      return Container(
+                        margin: EdgeInsets.all(20),
+                        height: 200,width: 200,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(11),
+                          image: DecorationImage(image: NetworkImage(eachWall),fit: BoxFit.cover),
+                        ),
+                      );
+                      }
+                      );
+                }
 
-      return Container();
-      }
+              return Container();
+              }
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
