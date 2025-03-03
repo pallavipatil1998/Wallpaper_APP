@@ -12,3 +12,8 @@ class WallpaperErrorState extends WallpaperState{
   String? errorMsg;
   WallpaperErrorState({required this.errorMsg});
 }
+
+class WallpaperInterNetErrorState extends WallpaperState{
+  String? errorMsg;
+  WallpaperInterNetErrorState({required this.errorMsg});
+}

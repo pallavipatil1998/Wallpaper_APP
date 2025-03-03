@@ -57,6 +57,8 @@ class _WallpaperHomeState extends State<WallpaperHome> {
               child: BlocBuilder<WallpaperBloc,WallpaperState>(builder: (ctx,state){
                 if(state is WallpaperLoadingState){
                   return Center(child: CircularProgressIndicator());
+                }else if(state is WallpaperInterNetErrorState){
+                  return Center(child: Text(state.errorMsg!));
                 }else if(state is WallpaperErrorState){
                   return Center(child: Text("${state.errorMsg}"));
                 }else if(state is WallpaperLoadedState){
