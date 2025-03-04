@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:wallpaper_app/All%20Bloc/Search%20Bloc/wall_search_bloc.dart';
 import 'package:wallpaper_app/api/api_helper.dart';
+import 'package:wallpaper_app/screens/scrolling_licener_controller_page.dart';
 import 'package:wallpaper_app/screens/splash_screen.dart';
 import 'package:wallpaper_app/screens/wallpaper_home.dart';
 
@@ -27,7 +28,8 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: SplashScreen()
+      home: ScrollingLicenerControllerPage()
+      // SplashScreen()
     );
   }
 }
