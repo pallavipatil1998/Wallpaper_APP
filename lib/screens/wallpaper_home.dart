@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:wallpaper_app/screens/wall_search_page.dart';
+import 'package:wallpaper_app/screens/wallpaper_detail_page.dart';
 import '../All Bloc/tranding_wall_bloc/wallpaper_bloc.dart';
 import '../All Bloc/tranding_wall_bloc/wallpaper_event.dart';
 import '../All Bloc/tranding_wall_bloc/wallpaper_state.dart';
@@ -177,15 +178,20 @@ class _WallpaperHomeState extends State<WallpaperHome> {
                               itemBuilder: (ctx, index) {
                                 var eachWall = state
                                     .wallModel.photos![index].src!.portrait!;
-                                return Container(
-                                  margin: EdgeInsets.all(20),
-                                  height: 200,
-                                  width: 200,
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(11),
-                                    image: DecorationImage(
-                                        image: NetworkImage(eachWall),
-                                        fit: BoxFit.cover),
+                                return InkWell(
+                                  onTap: (){
+                                    Navigator.push(context, MaterialPageRoute(builder: (context) => WallpaperDetailPage(imgUrl: eachWall),));
+                                  },
+                                  child: Container(
+                                    margin: EdgeInsets.all(20),
+                                    height: 200,
+                                    width: 200,
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(11),
+                                      image: DecorationImage(
+                                          image: NetworkImage(eachWall),
+                                          fit: BoxFit.cover),
+                                    ),
                                   ),
                                 );
                               });
@@ -256,7 +262,7 @@ class _WallpaperHomeState extends State<WallpaperHome> {
                           itemCount: categoriesName.length,
                           gridDelegate:
                               SliverGridDelegateWithFixedCrossAxisCount(
-                                  crossAxisCount: 2, childAspectRatio: 9 / 16),
+                                  crossAxisCount: 2, childAspectRatio: 16 /9),
                           itemBuilder: (ctx, index) {
                             return InkWell(
                               onTap: () {

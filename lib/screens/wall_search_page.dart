@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:wallpaper_app/All%20Bloc/Search%20Bloc/wall_search_bloc.dart';
 import 'package:wallpaper_app/All%20Bloc/Search%20Bloc/wall_search_event.dart';
 import 'package:wallpaper_app/All%20Bloc/Search%20Bloc/wall_search_state.dart';
+import 'package:wallpaper_app/screens/wallpaper_detail_page.dart';
 
 class WallSearchPage extends StatefulWidget {
   String mQuery;
@@ -69,15 +70,20 @@ class _WallSearchPageState extends State<WallSearchPage> {
                                   crossAxisSpacing: 11,
                                   mainAxisSpacing: 11),
                               itemBuilder: (ctx, index) {
-                                return Container(
-                                  width: 200,height: 400,
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(15),
-                                    image: DecorationImage(
-                                      fit: BoxFit.cover,
-                                      image: NetworkImage(
-                                        state.wallModel.photos![index].src!
-                                            .portrait!,
+                                return InkWell(
+                                  onTap: (){
+                                    Navigator.push(context, MaterialPageRoute(builder: (context) => WallpaperDetailPage(imgUrl:state.wallModel.photos![index].src!.portrait! ),));
+                                },
+                                  child: Container(
+                                    width: 200,height: 400,
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(15),
+                                      image: DecorationImage(
+                                        fit: BoxFit.cover,
+                                        image: NetworkImage(
+                                          state.wallModel.photos![index].src!
+                                              .portrait!,
+                                        ),
                                       ),
                                     ),
                                   ),
