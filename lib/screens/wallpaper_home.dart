@@ -217,7 +217,11 @@ class _WallpaperHomeState extends State<WallpaperHome> {
                                   context,
                                   MaterialPageRoute(
                                       builder: (context) => WallSearchPage(
-                                            mQuery:queryController.text.isNotEmpty ? queryController.text.toString() : "car",
+                                            mQuery:
+                                                queryController.text.isNotEmpty
+                                                    ? queryController.text
+                                                        .toString()
+                                                    : "car",
                                             mColor: colorList[index]["code"],
                                           )));
                             },
@@ -252,42 +256,42 @@ class _WallpaperHomeState extends State<WallpaperHome> {
                           itemCount: categoriesName.length,
                           gridDelegate:
                               SliverGridDelegateWithFixedCrossAxisCount(
-                                  crossAxisCount: 2, childAspectRatio: 16 / 9),
+                                  crossAxisCount: 2, childAspectRatio: 9 / 16),
                           itemBuilder: (ctx, index) {
                             return InkWell(
                               onTap: () {
                                 Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) => WallSearchPage(
-                                              mQuery: categoriesName[index]["name"]
-                                            )),
-                                  );
-
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => WallSearchPage(
+                                          mQuery: categoriesName[index]
+                                              ["name"])),
+                                );
                               },
                               child: Stack(
                                 children: [
-                                Container(
-                                height: 400,
-                                width: 200,
-                                margin: EdgeInsets.only(
-                                    right: 15, bottom: 10),
-                                decoration: BoxDecoration(
-                                    borderRadius:
-                                    BorderRadius.circular(10),
-                                    image: DecorationImage(
-                                        image: AssetImage(categoriesName[index]["img_cat"]),
-                                        fit: BoxFit.cover)),
-                                child: Center(
-                                  child: Text(
-                                    "${categoriesName[index]["name"]}",
-                                    style: TextStyle(
-                                        fontWeight: FontWeight.bold,
-                                        color: Colors.white,
-                                        fontSize: 16),
+                                  Container(
+                                    height: 400,
+                                    width: 200,
+                                    margin:
+                                        EdgeInsets.only(right: 15, bottom: 10),
+                                    decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(10),
+                                        image: DecorationImage(
+                                            image: AssetImage(
+                                                categoriesName[index]
+                                                    ["img_cat"]),
+                                            fit: BoxFit.cover)),
+                                    child: Center(
+                                      child: Text(
+                                        "${categoriesName[index]["name"]}",
+                                        style: TextStyle(
+                                            fontWeight: FontWeight.bold,
+                                            color: Colors.white,
+                                            fontSize: 16),
+                                      ),
+                                    ),
                                   ),
-                                ),
-                              ),
                                 ],
                               ),
                             );

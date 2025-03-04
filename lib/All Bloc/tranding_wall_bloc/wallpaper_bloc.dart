@@ -26,21 +26,6 @@ class WallpaperBloc extends Bloc< WallpaperEvent,WallpaperState>{
     },);
 
 
-    /*on<WallGetSerachEvent>((event, emit)async {
-      emit(WallpaperLoadingState());
-      try{
-        var res = await db.getApi(url: "${Urls.searchingWallUrls}?query=${event.query}");
-        emit(WallpaperLoadedState(wallModel: MainWallpaperApi.fromJson(res)));
-
-      }catch(e){
-        if(e is FetchDataException){
-          emit(WallpaperInterNetErrorState(errorMsg: e.toString()));
-        }else{
-          emit(WallpaperErrorState(errorMsg: e.toString()));
-        }
-      }
-    },);
-*/
 
 
 
