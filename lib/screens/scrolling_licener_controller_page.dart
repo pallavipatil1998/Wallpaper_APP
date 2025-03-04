@@ -59,16 +59,45 @@ class _ScrollingLicenerControllerPageState extends State<ScrollingLicenerControl
          title: Text("Scrolling"),
        ),
 
-      body: GridView.builder(
-        controller: mController,
-        itemCount: mColor.length,
-          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2,mainAxisSpacing: 11,crossAxisSpacing: 11,childAspectRatio: 9/16),
-          itemBuilder: (_,index){
-          return Container(
-            color: mColor[index],
-          );
+      body: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: NotificationListener(
+          onNotification: (ScrollNotification notification){
+            if(notification is ScrollStartNotification){
+              print("Scroll started!!");
 
-          }
+            }else if(notification is ScrollUpdateNotification){
+              print("Scrolling...");
+
+            }else if(notification is ScrollEndNotification){
+              print("Scroll End");
+
+            }
+
+
+            if(notification.metrics.pixels==notification.metrics.extentBefore){
+            print("List is about to end!!");
+            }
+
+            if(notification.metrics.pixels==notification.metrics.extentAfter){
+            print("List is about to end!!");
+            }
+
+            return false;
+
+          },
+          child: GridView.builder(
+            controller: mController,
+            itemCount: mColor.length,
+              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2,mainAxisSpacing: 11,crossAxisSpacing: 11,childAspectRatio: 9/16),
+              itemBuilder: (_,index){
+              return Container(
+                color: mColor[index],
+              );
+
+              }
+          ),
+        ),
       ),
 
     );
