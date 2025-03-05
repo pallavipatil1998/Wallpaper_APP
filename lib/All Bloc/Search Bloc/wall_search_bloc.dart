@@ -13,7 +13,7 @@ class WallSearchBloc extends Bloc<WallSearchEvent,WallSearchState>{
     on<GetSerachWallEvent>((event, emit)async {
       emit(WallSearchLoadingState());
      try{
-       var res= await db.getApi(url:"${Urls.searchingWallUrls}?query=${event.query}&color=${event.mColor}&per_page=70 ");
+       var res= await db.getApi(url:"${Urls.searchingWallUrls}?query=${event.query}&color=${event.mColor}&per_page=20&page=${event.pageNo} ");
        emit(WallSearchLoadedState(wallModel: MainWallpaperApi.fromJson(res)));
      } catch(e){
        if(e is FetchDataException){
